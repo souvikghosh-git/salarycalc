@@ -1,0 +1,13 @@
+{
+  "name": "salary-calculator",
+  "version": "1.0.0",
+  "description": "AI-Powered Indian Salary Calculator",
+  "private": true,
+  "scripts": {
+    "dev": "npx wrangler pages dev . --port 8788",
+    "deploy": "npx wrangler pages deploy ."
+  },
+  "devDependencies": {
+    "wrangler": "^3.99.0"
+  }
+}

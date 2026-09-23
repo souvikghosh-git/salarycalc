@@ -1,0 +1,503 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="AI-Powered Indian Salary Calculator for FY 2026-27. Calculate your in-hand salary from CTC instantly with Old & New tax regime comparison, EPF, HRA, and complete salary breakdown.">
+  <meta name="keywords" content="salary calculator, CTC to in-hand, Indian salary, take home salary, FY 2026-27, income tax calculator, salary breakup, EPF calculator">
+  <title>AI Salary Calculator — CTC to In-Hand Salary (FY 2026-27)</title>
+  <link rel="stylesheet" href="styles.css">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>💰</text></svg>">
+</head>
+<body>
+
+  <!-- Animated Background -->
+  <div class="bg-gradient-animation"></div>
+  <div class="bg-orb bg-orb--1"></div>
+  <div class="bg-orb bg-orb--2"></div>
+  <div class="bg-orb bg-orb--3"></div>
+
+  <!-- Navigation -->
+  <nav class="navbar" id="navbar">
+    <div class="container">
+      <a href="#" class="nav-brand">
+        <div class="nav-logo">₹</div>
+        <div class="nav-title">Salary<span>Calc</span>.ai</div>
+      </a>
+      <button class="nav-mobile-toggle" id="nav-mobile-toggle" aria-label="Toggle navigation">☰</button>
+      <ul class="nav-links" id="nav-links">
+        <li><a href="#calculator">Calculator</a></li>
+        <li><a href="#tax-slabs">Tax Slabs</a></li>
+        <li><a href="#faq">FAQ</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <!-- Hero Section -->
+  <section class="hero">
+    <div class="container">
+      <div class="hero-badge">
+        <span class="badge-dot"></span>
+        Updated for FY 2026-27 · New Tax Regime
+      </div>
+      <h1>
+        Know Your Exact<br>
+        <span class="gradient-text">Take-Home Salary</span>
+      </h1>
+      <p class="hero-subtitle">
+        India's smartest salary calculator powered by AI. Convert your CTC to in-hand salary with complete tax breakdown in seconds.
+      </p>
+      <div class="hero-stats">
+        <div class="hero-stat">
+          <div class="hero-stat-value">FY 2026-27</div>
+          <div class="hero-stat-label">Latest Tax Slabs</div>
+        </div>
+        <div class="hero-stat">
+          <div class="hero-stat-value">Old & New</div>
+          <div class="hero-stat-label">Both Regimes</div>
+        </div>
+        <div class="hero-stat">
+          <div class="hero-stat-value">100% Free</div>
+          <div class="hero-stat-label">No Sign-up</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Calculator Section -->
+  <section class="calculator-section" id="calculator">
+    <div class="container">
+      <div class="calculator-grid">
+
+        <!-- Input Card -->
+        <div class="glass-card calculator-input-card animate-in">
+          <div class="card-header">
+            <div class="card-header-icon">⚡</div>
+            <div>
+              <h2>Salary Calculator</h2>
+              <p>Enter your CTC to get started</p>
+            </div>
+          </div>
+
+          <!-- CTC Input -->
+          <div class="form-group">
+            <label class="form-label" for="input-ctc">Annual CTC <span class="label-hint">(Cost to Company)</span></label>
+            <div class="input-wrapper">
+              <span class="input-prefix">₹</span>
+              <input type="text" id="input-ctc" class="form-input" placeholder="e.g. 1200000" inputmode="numeric" autocomplete="off">
+            </div>
+          </div>
+
+          <!-- Tax Regime Toggle -->
+          <div class="form-group">
+            <label class="form-label">Tax Regime</label>
+            <div class="toggle-group">
+              <div class="toggle-slider"></div>
+              <button class="toggle-option active" data-regime="new" id="toggle-new">New Regime</button>
+              <button class="toggle-option" data-regime="old" id="toggle-old">Old Regime</button>
+            </div>
+          </div>
+
+          <!-- City Type -->
+          <div class="form-group">
+            <label class="form-label" for="select-city">City Type <span class="label-hint">(for HRA calculation)</span></label>
+            <select id="select-city" class="form-select">
+              <option value="metro">Metro (Delhi, Mumbai, Kolkata, Chennai)</option>
+              <option value="non-metro">Non-Metro (Other Cities)</option>
+            </select>
+          </div>
+
+          <!-- EPF Option -->
+          <div class="form-group">
+            <label class="form-label" for="select-epf">EPF Contribution</label>
+            <select id="select-epf" class="form-select">
+              <option value="basic">12% of Basic Salary</option>
+              <option value="capped">12% of ₹15,000 (Capped)</option>
+            </select>
+          </div>
+
+          <!-- Old Regime Deductions (conditionally visible) -->
+          <div class="old-regime-section" id="old-regime-section">
+            <div class="form-divider"></div>
+            <div class="old-regime-header">
+              🏛️ Old Regime Deductions
+            </div>
+
+            <div class="form-group">
+              <label class="form-label" for="input-rent">Monthly Rent Paid <span class="label-hint">(for HRA exemption)</span></label>
+              <div class="input-wrapper">
+                <span class="input-prefix">₹</span>
+                <input type="text" id="input-rent" class="form-input" placeholder="0" inputmode="numeric">
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label class="form-label" for="input-80c">Section 80C Investments <span class="label-hint">(excl. EPF, max ₹1.5L)</span></label>
+              <div class="input-wrapper">
+                <span class="input-prefix">₹</span>
+                <input type="text" id="input-80c" class="form-input" placeholder="0" inputmode="numeric">
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label class="form-label" for="input-medical">Medical Insurance (80D) <span class="label-hint">(annual premium)</span></label>
+              <div class="input-wrapper">
+                <span class="input-prefix">₹</span>
+                <input type="text" id="input-medical" class="form-input" placeholder="0" inputmode="numeric">
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label class="form-label" for="input-nps">NPS Contribution (80CCD) <span class="label-hint">(max ₹50,000)</span></label>
+              <div class="input-wrapper">
+                <span class="input-prefix">₹</span>
+                <input type="text" id="input-nps" class="form-input" placeholder="0" inputmode="numeric">
+              </div>
+            </div>
+          </div>
+
+          <!-- Calculate Button -->
+          <button class="btn-calculate" id="btn-calculate">
+            Calculate Take-Home Salary →
+          </button>
+        </div>
+
+        <!-- Results Card -->
+        <div class="results-container">
+          <div class="glass-card results-card results-hidden" id="results-card">
+            <div class="card-header">
+              <div class="card-header-icon" style="background: var(--gradient-success);">💰</div>
+              <div>
+                <h2>Your Salary Breakdown</h2>
+                <p>Detailed monthly & annual view</p>
+              </div>
+            </div>
+
+            <!-- Take Home Highlight -->
+            <div class="take-home-highlight">
+              <div class="take-home-label">Monthly Take-Home Salary</div>
+              <div class="take-home-amount" id="take-home-amount">₹0</div>
+              <div class="take-home-annual" id="take-home-annual">Annual: <span>₹0</span></div>
+            </div>
+
+            <!-- Monthly / Annual Toggle -->
+            <div class="result-tabs">
+              <button class="result-tab active" data-view="monthly">Monthly</button>
+              <button class="result-tab" data-view="annual">Annual</button>
+            </div>
+
+            <!-- Breakdown Table -->
+            <table class="breakdown-table">
+              <tbody id="breakdown-tbody"></tbody>
+            </table>
+
+            <!-- Tax Details -->
+            <div id="tax-details"></div>
+
+            <!-- Donut Chart -->
+            <div class="chart-container">
+              <div class="chart-title">CTC Distribution</div>
+              <div class="donut-chart">
+                <svg viewBox="0 0 200 200" id="donut-svg"></svg>
+                <div class="donut-center">
+                  <div class="donut-center-value" id="donut-center-value">₹0</div>
+                  <div class="donut-center-label" id="donut-center-label">MONTHLY</div>
+                </div>
+              </div>
+              <div class="chart-legend" id="chart-legend"></div>
+            </div>
+
+            <!-- Regime Comparison -->
+            <div class="regime-comparison" id="regime-comparison"></div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- Tax Slabs Section -->
+  <section class="tax-slabs-section" id="tax-slabs">
+    <div class="container">
+      <div class="section-header">
+        <h2>Income Tax Slabs <span class="gradient-text">FY 2026-27</span></h2>
+        <p>Compare tax rates under both regimes for Assessment Year 2027-28</p>
+      </div>
+
+      <div class="tax-slabs-grid">
+        <!-- New Regime -->
+        <div class="glass-card slab-card">
+          <div class="slab-card-header">
+            <h3>New Tax Regime</h3>
+            <span class="slab-badge slab-badge--new">Default</span>
+          </div>
+          <table class="slab-table">
+            <thead>
+              <tr>
+                <th>Income Slab</th>
+                <th>Tax Rate</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr><td>Up to ₹4,00,000</td><td>Nil</td></tr>
+              <tr><td>₹4,00,001 – ₹8,00,000</td><td>5%</td></tr>
+              <tr><td>₹8,00,001 – ₹12,00,000</td><td>10%</td></tr>
+              <tr><td>₹12,00,001 – ₹16,00,000</td><td>15%</td></tr>
+              <tr><td>₹16,00,001 – ₹20,00,000</td><td>20%</td></tr>
+              <tr><td>₹20,00,001 – ₹24,00,000</td><td>25%</td></tr>
+              <tr><td>Above ₹24,00,000</td><td>30%</td></tr>
+            </tbody>
+          </table>
+          <div class="slab-footer">
+            <strong>Standard Deduction:</strong> ₹75,000 &nbsp;|&nbsp;
+            <strong>87A Rebate:</strong> Zero tax up to ₹12.75L (with std deduction) &nbsp;|&nbsp;
+            <strong>Cess:</strong> 4%
+          </div>
+        </div>
+
+        <!-- Old Regime -->
+        <div class="glass-card slab-card">
+          <div class="slab-card-header">
+            <h3>Old Tax Regime</h3>
+            <span class="slab-badge slab-badge--old">Optional</span>
+          </div>
+          <table class="slab-table">
+            <thead>
+              <tr>
+                <th>Income Slab</th>
+                <th>Tax Rate</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr><td>Up to ₹2,50,000</td><td>Nil</td></tr>
+              <tr><td>₹2,50,001 – ₹5,00,000</td><td>5%</td></tr>
+              <tr><td>₹5,00,001 – ₹10,00,000</td><td>20%</td></tr>
+              <tr><td>Above ₹10,00,000</td><td>30%</td></tr>
+            </tbody>
+          </table>
+          <div class="slab-footer">
+            <strong>87A Rebate:</strong> ₹12,500 (income ≤ ₹5L) &nbsp;|&nbsp;
+            <strong>80C:</strong> Up to ₹1.5L &nbsp;|&nbsp;
+            <strong>HRA, LTA, 80D:</strong> Exempt &nbsp;|&nbsp;
+            <strong>Cess:</strong> 4%
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ Section -->
+  <section class="faq-section" id="faq">
+    <div class="container">
+      <div class="section-header">
+        <h2>Frequently Asked <span class="gradient-text">Questions</span></h2>
+        <p>Everything you need to know about Indian salary calculations</p>
+      </div>
+
+      <div class="faq-list">
+
+        <div class="faq-item">
+          <button class="faq-question">
+            <span>What is Salary and its components?</span>
+            <span class="faq-icon">+</span>
+          </button>
+          <div class="faq-answer">
+            <div class="faq-answer-content">
+              Salary is a fixed amount of money or compensation paid to an employee by an employer in return for work performed. The most common components are:<br><br>
+              <strong>Basic Salary:</strong> Fixed base part, usually 50% of gross salary. Fully taxable.<br>
+              <strong>HRA (House Rent Allowance):</strong> For rented accommodation expenses. Tax-exempt if conditions are met.<br>
+              <strong>LTA (Leave Travel Allowance):</strong> Covers travel expenses when on leave. Eligible for income tax exemption.<br>
+              <strong>Special Allowance:</strong> Fixed amount over basic salary. Fully taxable.<br>
+              <strong>Bonus:</strong> Performance-based incentive. Fully taxable.<br>
+              <strong>EPF:</strong> Both employer and employee contribute 12% of basic salary. Retirement benefit scheme.<br>
+              <strong>Professional Tax:</strong> State-level tax, max ₹2,500/year.
+            </div>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-question">
+            <span>What is the difference between CTC and In-hand salary?</span>
+            <span class="faq-icon">+</span>
+          </button>
+          <div class="faq-answer">
+            <div class="faq-answer-content">
+              <strong>CTC (Cost to Company)</strong> is the total annual cost your employer spends to hire you, including benefits like employer EPF, gratuity, insurance, etc.<br><br>
+              <strong>In-hand salary</strong> is what you actually receive after deductions like Employee EPF, Income Tax, and Professional Tax.<br><br>
+              Your CTC will always be higher than your in-hand salary. For example, a ₹10 LPA CTC typically gives you around ₹70,000–₹75,000/month in-hand.
+            </div>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-question">
+            <span>How is take-home salary calculated?</span>
+            <span class="faq-icon">+</span>
+          </button>
+          <div class="faq-answer">
+            <div class="faq-answer-content">
+              <strong>Step 1:</strong> Gross Salary = CTC − Employer's EPF − Gratuity<br><br>
+              <strong>Step 2:</strong> Taxable Income = Gross Salary − Standard Deduction − HRA Exemption − 80C Deductions (varies by regime)<br><br>
+              <strong>Step 3:</strong> Calculate Income Tax based on applicable slab rates + 4% Cess<br><br>
+              <strong>Step 4:</strong> Take-Home = Gross Salary − Income Tax − Employee EPF − Professional Tax<br><br>
+              Gratuity is calculated as: (15/26) × Monthly Basic Salary × Years of Service
+            </div>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-question">
+            <span>What is HRA and how much tax is exempted?</span>
+            <span class="faq-icon">+</span>
+          </button>
+          <div class="faq-answer">
+            <div class="faq-answer-content">
+              HRA (House Rent Allowance) is a monetary benefit for rented accommodation expenses. The tax-exempt portion is the <strong>minimum</strong> of:<br><br>
+              1. Actual HRA received from employer<br>
+              2. Actual rent paid minus 10% of basic salary<br>
+              3. 50% of basic salary (metro city) or 40% (non-metro city)<br><br>
+              <strong>Note:</strong> HRA exemption is only available under the Old Tax Regime. If you don't pay rent, HRA is fully taxable.
+            </div>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-question">
+            <span>How much EPF contribution is mandatory?</span>
+            <span class="faq-icon">+</span>
+          </button>
+          <div class="faq-answer">
+            <div class="faq-answer-content">
+              Both employer and employee contribute <strong>12% of basic salary</strong> towards EPF.<br><br>
+              <strong>If basic salary ≤ ₹15,000/month:</strong> 12% of basic salary (mandatory)<br>
+              <strong>If basic salary > ₹15,000/month:</strong> Company can choose to contribute either 12% of ₹15,000 (₹1,800/month) or 12% of full basic salary<br><br>
+              Employee EPF contribution qualifies for Section 80C deduction under the old regime (up to ₹1.5 lakh limit).
+            </div>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-question">
+            <span>What is the new tax regime for FY 2026-27?</span>
+            <span class="faq-icon">+</span>
+          </button>
+          <div class="faq-answer">
+            <div class="faq-answer-content">
+              The New Tax Regime (post Budget 2025) is the <strong>default regime</strong> for FY 2026-27:<br><br>
+              • Up to ₹4L = Nil &nbsp; • ₹4-8L = 5% &nbsp; • ₹8-12L = 10%<br>
+              • ₹12-16L = 15% &nbsp; • ₹16-20L = 20% &nbsp; • ₹20-24L = 25% &nbsp; • Above ₹24L = 30%<br><br>
+              <strong>Key features:</strong> Standard deduction of ₹75,000. Section 87A rebate gives zero tax for taxable income up to ₹12 lakh (effectively ₹12.75 lakh with standard deduction). Marginal relief available for income slightly above ₹12 lakh.
+            </div>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-question">
+            <span>Which Tax Regime should I choose?</span>
+            <span class="faq-icon">+</span>
+          </button>
+          <div class="faq-answer">
+            <div class="faq-answer-content">
+              There's no one-size-fits-all answer. It depends on your investments and deductions:<br><br>
+              <strong>Choose New Regime if:</strong> You don't have significant investments (80C, 80D), don't pay rent, or your CTC is below ₹12.75 LPA.<br><br>
+              <strong>Choose Old Regime if:</strong> You have ₹1.5L+ in 80C investments, pay substantial rent (HRA exemption), have medical insurance (80D), and NPS contributions.<br><br>
+              <strong>Pro tip:</strong> Use our calculator to compare both regimes — it shows you which one saves more!
+            </div>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-question">
+            <span>What is Gratuity? When can you avail it?</span>
+            <span class="faq-icon">+</span>
+          </button>
+          <div class="faq-answer">
+            <div class="faq-answer-content">
+              Gratuity is a monetary benefit given by an employer for services rendered. You're eligible after completing <strong>5 years</strong> of continuous service (exception: death or disability).<br><br>
+              <strong>Formula:</strong> Gratuity = (Last Basic Salary + DA) × 15/26 × Completed Years of Service<br><br>
+              While gratuity is typically paid as a lump sum at the end of service, the annual set-aside (15/26 × Monthly Basic) is deducted from your CTC for calculation purposes.
+            </div>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-question">
+            <span>What is marginal tax relief?</span>
+            <span class="faq-icon">+</span>
+          </button>
+          <div class="faq-answer">
+            <div class="faq-answer-content">
+              Marginal relief prevents excessive taxation when income is just above the tax-free limit (₹12 lakh for FY 2026-27).<br><br>
+              <strong>How it works:</strong> Your tax payable won't exceed the amount by which your income exceeds ₹12 lakh.<br><br>
+              <strong>Examples:</strong><br>
+              • ₹12.10L income → Tax = ₹10,000 (not ₹61,500)<br>
+              • ₹12.50L income → Tax = ₹50,000 (not ₹67,500)<br>
+              • ₹12.70L income → Tax = ₹70,000 (not ₹70,500)<br>
+              • ₹12.75L income → Tax = ₹71,250 (no relief applies above this)
+            </div>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-question">
+            <span>What is the difference between Financial Year and Assessment Year?</span>
+            <span class="faq-icon">+</span>
+          </button>
+          <div class="faq-answer">
+            <div class="faq-answer-content">
+              <strong>Financial Year (FY):</strong> The year in which income is earned (April to March). Example: FY 2026-27.<br><br>
+              <strong>Assessment Year (AY):</strong> The following year when tax is evaluated and returns are filed. Example: AY 2027-28.<br><br>
+              So income earned during FY 2026-27 is assessed and tax returns filed in AY 2027-28. The Income Tax Act, 2025 introduces a unified "Tax Year" concept intended to simplify this.
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-content">
+        <div class="footer-brand">
+          <div class="nav-logo">₹</div>
+          <span>SalaryCalc.ai</span>
+        </div>
+        <p class="footer-text">
+          AI-powered salary calculator for Indian professionals. Accurate CTC to in-hand salary conversion with the latest FY 2026-27 tax slabs.
+        </p>
+        <p class="footer-disclaimer">
+          Disclaimer: This calculator provides approximate estimates for informational purposes only. Actual salary may vary based on employer policies, state-specific deductions, and individual circumstances. Please consult a tax professional for precise calculations.
+        </p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- AI Chat Widget -->
+  <button class="ai-chat-toggle" id="ai-chat-toggle" aria-label="Open AI Salary Advisor">
+    🤖
+  </button>
+
+  <div class="ai-chat-panel" id="ai-chat-panel">
+    <div class="ai-chat-header">
+      <div class="ai-chat-avatar">🤖</div>
+      <div class="ai-chat-header-text">
+        <h3>AI Salary Advisor</h3>
+        <p>Ask me anything about salary & taxes</p>
+      </div>
+    </div>
+    <div class="ai-chat-messages" id="ai-chat-messages">
+      <div class="chat-message chat-message--ai">
+        Hi! 👋 I'm your AI salary advisor. Ask me anything about Indian salary components, CTC, tax regimes, HRA, EPF, or deductions. How can I help?
+      </div>
+    </div>
+    <div class="ai-chat-input">
+      <input type="text" id="ai-chat-input" placeholder="Ask about salary, tax, HRA..." autocomplete="off">
+      <button class="ai-chat-send" id="ai-chat-send" aria-label="Send message">→</button>
+    </div>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>
