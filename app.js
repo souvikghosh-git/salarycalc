@@ -492,9 +492,16 @@ const UI = {
     const mobileToggle = document.getElementById('nav-mobile-toggle');
     if (mobileToggle) {
       mobileToggle.addEventListener('click', () => {
-        document.getElementById('nav-links').classList.toggle('mobile-open');
+        document.getElementById('nav-links')?.classList.toggle('mobile-open');
       });
     }
+
+    // Auto-close mobile nav when any link is clicked
+    document.querySelectorAll('.nav-links a').forEach(link => {
+      link.addEventListener('click', () => {
+        document.getElementById('nav-links')?.classList.remove('mobile-open');
+      });
+    });
   },
 
   updateRegimeVisibility() {
@@ -797,14 +804,44 @@ const UI = {
     const panel = document.getElementById('ai-chat-panel');
     const input = document.getElementById('ai-chat-input');
     const sendBtn = document.getElementById('ai-chat-send');
+    const closeBtn = document.getElementById('ai-chat-close-btn');
+    const backdrop = document.getElementById('ai-chat-backdrop');
 
     if (!toggle || !panel) return;
 
+    const openChat = () => {
+      // Close mobile navigation menu if open
+      document.getElementById('nav-links')?.classList.remove('mobile-open');
+
+      toggle.classList.add('active');
+      panel.classList.add('open');
+      backdrop?.classList.add('open');
+      document.body.classList.add('chat-modal-open');
+      setTimeout(() => input?.focus(), 150);
+    };
+
+    const closeChat = () => {
+      toggle.classList.remove('active');
+      panel.classList.remove('open');
+      backdrop?.classList.remove('open');
+      document.body.classList.remove('chat-modal-open');
+    };
+
     toggle.addEventListener('click', () => {
-      toggle.classList.toggle('active');
-      panel.classList.toggle('open');
       if (panel.classList.contains('open')) {
-        input?.focus();
+        closeChat();
+      } else {
+        openChat();
+      }
+    });
+
+    closeBtn?.addEventListener('click', closeChat);
+    backdrop?.addEventListener('click', closeChat);
+
+    // Close on Escape key
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && panel.classList.contains('open')) {
+        closeChat();
       }
     });
 

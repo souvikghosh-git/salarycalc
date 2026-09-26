@@ -475,17 +475,21 @@
   </footer>
 
   <!-- AI Chat Widget -->
+  <div class="ai-chat-backdrop" id="ai-chat-backdrop"></div>
+
   <button class="ai-chat-toggle" id="ai-chat-toggle" aria-label="Open AI Salary Advisor">
-    🤖
+    <span class="chat-toggle-icon">🤖</span>
   </button>
 
   <div class="ai-chat-panel" id="ai-chat-panel">
+    <div class="ai-chat-handle-bar"></div>
     <div class="ai-chat-header">
       <div class="ai-chat-avatar">🤖</div>
       <div class="ai-chat-header-text">
         <h3>AI Salary Advisor</h3>
         <p>Ask me anything about salary & taxes</p>
       </div>
+      <button class="ai-chat-close-btn" id="ai-chat-close-btn" aria-label="Close AI Chat">✕</button>
     </div>
     <div class="ai-chat-messages" id="ai-chat-messages">
       <div class="chat-message chat-message--ai">
