@@ -2,7 +2,7 @@
 
 > Calculate your exact take-home salary from CTC/Fixed Component with FY 2026-27 tax slabs, AI chatbot, and zero cost.
 
-🔗 **Live:** [salarycalc.ghosh-krisnen.workers.dev](https://salarycalc.ghosh-krisnen.workers.dev)
+🔗 **Live:** [salarycalc.souvikghosh.dev](https://salarycalc.souvikghosh.dev)
 
 ---
 
